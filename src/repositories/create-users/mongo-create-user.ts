@@ -5,7 +5,7 @@ import {
 import { MondoDB } from "../../dataBase/mongodb";
 import { User } from "../../models/user";
 
-export class MongoCreateUser implements ICreateUserRepository {
+export class MongoCreateUserReposytory implements ICreateUserRepository {
   async createUser(params: Createuserparams): Promise<User> {
     const { insertedId } = await MondoDB.db
       .collection("users")
