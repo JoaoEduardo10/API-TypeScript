@@ -1,0 +1,16 @@
+{
+  "name": "Api-typeScript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "João eduardo",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch 'src/' --exec 'ts-node src/server.ts' -e ts"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4",
+    "typescript": "^4.9.5"
+  }
+}
