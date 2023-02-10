@@ -2,21 +2,28 @@ import express from "express";
 import { config } from "dotenv";
 import { GetUserControllers } from "./controllers/get-users/get-users";
 import { MongoGetUsersRepositories } from "./repositories/get-users/mongo-get-users";
+import { MondoDB } from "./dataBase/mongodb";
 
-config();
+const main = async () => {
+  config();
 
-const app = express();
+  const app = express();
 
-const PORT = process.env.PORT || 8000;
+  await MondoDB.connnect();
 
-app.get("/users", async (_req, res) => {
-  const mongoRepository = await new MongoGetUsersRepositories();
+  app.get("/users", async (_req, res) => {
+    const mongoRepository = await new MongoGetUsersRepositories();
 
-  const getUserControllers = await new GetUserControllers(mongoRepository);
+    const getUserControllers = await new GetUserControllers(mongoRepository);
 
-  const response = await getUserControllers.handle();
+    const response = await getUserControllers.handle();
 
-  res.status(response.statusCode).json(response.body);
-});
+    res.status(response.statusCode).json(response.body);
+  });
 
-app.listen(PORT, () => console.log("SErvido iniciado"));
+  const PORT = process.env.PORT || 8000;
+
+  app.listen(PORT, () => console.log("SErvido iniciado"));
+};
+
+main();
