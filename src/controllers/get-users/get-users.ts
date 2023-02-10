@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IGetUserControllers, IGetUserRepository } from "./protocols";
+import { IControllrs } from "../protocols";
+import { IGetUserRepository } from "./protocols";
 
-export class GetUserControllers implements IGetUserControllers {
+export class GetUserControllers implements IControllrs {
   constructor(private readonly getUserRepository: IGetUserRepository) {}
 
   async handle() {

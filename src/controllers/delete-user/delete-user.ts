@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from "../../models/user";
-import { HttpRequest, HttpResponse } from "../protocols";
-import { IDeleteUserCrontroller, IDeleteUserReposytory } from "./protocols";
+import { HttpRequest, HttpResponse, IControllrs } from "../protocols";
+import { IDeleteUserReposytory } from "./protocols";
 
-export class DeleteUserControllers implements IDeleteUserCrontroller {
+export class DeleteUserControllers implements IControllrs {
   constructor(private readonly deleuserreposytories: IDeleteUserReposytory) {}
 
-  async hendle(HttpRequest: HttpRequest<User>): Promise<HttpResponse<User>> {
+  async handle(HttpRequest: HttpRequest<any>): Promise<HttpResponse<User>> {
     try {
       const id = HttpRequest.params.id;
 

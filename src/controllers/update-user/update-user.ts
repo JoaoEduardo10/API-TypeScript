@@ -1,18 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from "../../models/user";
-import { HttpRequest, HttpResponse } from "../protocols";
-import {
-  IUpdateUserControllers,
-  IUpdateUserRepository,
-  UpdateParams,
-} from "./protocols";
+import { HttpRequest, HttpResponse, IControllrs } from "../protocols";
+import { IUpdateUserRepository, UpdateParams } from "./protocols";
 
-export class UpadateUserControllers implements IUpdateUserControllers {
+export class UpadateUserControllers implements IControllrs {
   constructor(private readonly updateUserRepositore: IUpdateUserRepository) {}
 
-  async handle(HttpResquest: HttpRequest<any>): Promise<HttpResponse<User>> {
+  async handle(
+    HttpResquest: HttpRequest<UpdateParams>
+  ): Promise<HttpResponse<User>> {
     try {
       const id = HttpResquest.params.id;
+
+      if (!HttpResquest.body) {
+        return {
+          statusCode: 400,
+          body: "VoÇe não enviou um body",
+        };
+      }
 
       if (!id) {
         return {
